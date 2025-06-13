@@ -3,13 +3,17 @@ import { FaPhone } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 
 import css from "./Contact.module.css";
-import { deleteContact } from "../../redux/contactsOps";
+import { deleteContact, editContact } from "../../redux/contacts/operations";
 
 const Contact = ({ contact: { id, name, number } }) => {
   const dispatch = useDispatch();
 
   const handleDelete = () => {
     dispatch(deleteContact(id));
+  };
+
+  const handleEdit = () => {
+    dispatch(editContact(id));
   };
 
   return (
@@ -23,6 +27,7 @@ const Contact = ({ contact: { id, name, number } }) => {
         </p>
       </div>
       <button onClick={handleDelete}>Delete</button>
+      <button onClick={handleEdit}>Edit</button>
     </div>
   );
 };
