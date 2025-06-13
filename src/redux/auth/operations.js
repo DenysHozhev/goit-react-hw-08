@@ -8,7 +8,7 @@ export const registration = createAsyncThunk(
     try {
       const response = await api.post("/users/signup", userData);
       setAuthHeader(`Bearer ${response.data.token}`);
-      localStorage.setItem("token", response.data.token);
+      // localStorage.setItem("token", response.data.token);
       return response.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -22,7 +22,7 @@ export const login = createAsyncThunk(
     try {
       const response = await api.post("/users/login", userData);
       setAuthHeader(`Bearer ${response.data.token}`);
-      localStorage.setItem("token", response.data.token);
+      // localStorage.setItem("token", response.data.token);
       return response.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -31,7 +31,7 @@ export const login = createAsyncThunk(
 );
 
 export const refreshUser = createAsyncThunk(
-  "/auth/refresh",
+  "auth/refresh",
   async (_, thunkAPI) => {
     const reduxState = thunkAPI.getState();
     setAuthHeader(`Bearer ${reduxState.auth.token}`);
@@ -46,11 +46,11 @@ export const refreshUser = createAsyncThunk(
   }
 );
 
-export const logout = createAsyncThunk("/auth/logout", async (_, thunkApi) => {
+export const logout = createAsyncThunk("auth/logout", async (_, thunkApi) => {
   try {
     const response = await api.post("/users/logout");
     escAuthHeader();
-    localStorage.removeItem("token");
+    // localStorage.removeItem("token");
     return response.data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
