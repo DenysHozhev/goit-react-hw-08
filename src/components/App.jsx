@@ -12,11 +12,9 @@ const ContactsPage = lazy(() => import("../pages/ContactsPage"));
 const HomePage = lazy(() => import("../pages/HomePage"));
 const ErrorPage = lazy(() => import("../pages/ErrorPage"));
 const Layout = lazy(() => import("./layout/Layout"));
-const RegistrationPage = lazy(() => import("../pages/registrationPage"));
+const RegistrationPage = lazy(() => import("../pages/RegistrationPage"));
 const Logout = lazy(() => import("./logout/Logout"));
-const PrivateRoute = lazy(() =>
-  import("./contactList/privateRoute/PrivateRoute")
-);
+const PrivateRoute = lazy(() => import("./privateRoute/PrivateRoute"));
 
 function App() {
   const dispatch = useDispatch();
