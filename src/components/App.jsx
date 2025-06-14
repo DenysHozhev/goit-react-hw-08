@@ -5,6 +5,7 @@ import { lazy, useEffect } from "react";
 import { RegistrationPage } from "../pages/registrationPage";
 import { Route, Routes } from "react-router-dom";
 import Logout from "./logout/Logout";
+import PrivateRoute from "./contactList/privateRoute/PrivateRoute";
 
 const ContactForm = lazy(() => import("./contactForm/ContactForm"));
 const ContactList = lazy(() => import("./contactList/ContactList"));
@@ -32,12 +33,14 @@ function App() {
       <Layout />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/regoster" element={<RegistrationPage />} />
+        <Route path="/register" element={<RegistrationPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/contacts" element={<ContactsPage />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/contacts" element={<ContactsPage />} />
+        </Route>
+
         <Route path="*" element={<ErrorPage />} />
       </Routes>
-      <Logout />
 
       {isLoading && !error && <strong>Loading contacts? please wait...</strong>}
     </div>

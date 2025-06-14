@@ -1,7 +1,7 @@
 export const HomePage = () => {
   return (
     <div>
-      <h1>Contact list</h1>
+      <h1>Your personal contact list</h1>
     </div>
   );
 };
