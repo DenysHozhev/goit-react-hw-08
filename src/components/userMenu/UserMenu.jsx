@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
 import { logout } from "../../redux/auth/operations";
-import css from "./Logout.module.css";
+import css from "./UserMenu.module.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-export const Logout = () => {
+export const UserMenu = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -30,4 +30,4 @@ export const Logout = () => {
   );
 };
 
-export default Logout;
+export default UserMenu;

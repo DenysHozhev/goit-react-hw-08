@@ -6,6 +6,7 @@ import {
   editContact,
 } from "./operations";
 import { selectNameFilter } from "../filters/slice";
+import { logout } from "../auth/operations";
 
 const handlePending = (state) => {
   state.loading = true;
@@ -58,7 +59,12 @@ const ContactsSlice = createSlice({
           item.id === action.payload.id ? action.payload : item
         );
       })
-      .addCase(editContact.rejected, handleRejected);
+      .addCase(editContact.rejected, handleRejected)
+      .addCase(logout.fulfilled, (state) => {
+        state.items = [];
+        state.loading = false;
+        state.error = null;
+      });
   },
 });
 
