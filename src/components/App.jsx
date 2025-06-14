@@ -3,30 +3,30 @@ import { fetchContacts } from "../redux/contacts/operations";
 import { selectError, selectLoading } from "../redux/contacts/slice";
 import { lazy, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import { selectIsRefreshing } from "../redux/auth/selectors";
+import { refreshUser } from "../redux/auth/operations";
 
-const ContactForm = lazy(() => import("./contactForm/ContactForm"));
-const ContactList = lazy(() => import("./contactList/ContactList"));
-const SearchBox = lazy(() => import("./searchBox/SearchBox"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
 const ContactsPage = lazy(() => import("../pages/ContactsPage"));
 const HomePage = lazy(() => import("../pages/HomePage"));
 const ErrorPage = lazy(() => import("../pages/ErrorPage"));
 const Layout = lazy(() => import("./layout/Layout"));
 const RegistrationPage = lazy(() => import("../pages/RegistrationPage"));
-const Logout = lazy(() => import("./logout/Logout"));
 const PrivateRoute = lazy(() => import("./privateRoute/PrivateRoute"));
 
 function App() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectLoading);
   const error = useSelector(selectError);
-  const token = localStorage.getItem("token");
+  const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    if (token) {
-      dispatch(fetchContacts());
-    }
-  }, [dispatch, token]);
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  if (isRefreshing) {
+    return <div>Loading user data...</div>;
+  }
 
   return (
     <div className="main">
