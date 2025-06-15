@@ -8,18 +8,18 @@ import { fetchContacts } from "../redux/contacts/operations";
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
-  const IsLoggedIn = useSelector(selectIsLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
-    if (IsLoggedIn) {
+    if (isLoggedIn) {
       dispatch(fetchContacts());
     }
-  });
+  }, [isLoggedIn, dispatch]);
 
   return (
     <div>
       <h2>Your contacts</h2>
-      {IsLoggedIn && (
+      {isLoggedIn && (
         <>
           <ContactForm />
           <SearchBox />
